@@ -135,18 +135,15 @@ public class Converter {
             JsonArray colHeadings = (JsonArray) json.get("ColHeadings");
             JsonArray data = (JsonArray) json.get("Data");
 
-            // 2. Set up the CSV writer
             StringWriter writer = new StringWriter();
             CSVWriter csvWriter = new CSVWriter(writer);
 
-            // 3. Write the header row
             String[] headings = new String[colHeadings.size()];
             for (int i = 0; i < colHeadings.size(); i++) {
                 headings[i] = colHeadings.get(i).toString();
             }
             csvWriter.writeNext(headings);
 
-            // 4. Write one CSV row for each record
             for (int i = 0; i < data.size(); i++) {
                 JsonArray record = (JsonArray) data.get(i);
 
@@ -163,7 +160,6 @@ public class Converter {
                 csvWriter.writeNext(row);
             }
 
-            // 5. Get the finished CSV text
             result = writer.toString();
             
         }
